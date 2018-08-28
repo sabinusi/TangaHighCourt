@@ -1,0 +1,93 @@
+//- extends ../layout
+//- block content
+//-     section#main-content
+//-       section.wrapper.site-min-height
+//-            include ../../partials/flash
+extends ../layout
+block content
+    section#main-content
+      section.wrapper.site-min-height
+           include ../../partials/flash
+           .row.mt
+                .col-md-12
+                  .content-panel
+                      table.table.table-striped.table-advance.table-hover#example.display(width='100%')
+                        h4
+                         | CASES
+                         button.btn.btn-success.btn-xs.pull-right.fa.fa-database(type='button', data-toggle='modal', data-target='#largeShoes')
+                           | ADD NEW CASE         
+                        span
+                        hr
+           
+           
+               
+    //model
+    #largeShoes.modal.fade(tabindex='-1', role='dialog', aria-labelledby='modalLabelLarge', aria-hidden='true')
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-header
+            h4#modalLabelLarge.modal-title Adding New Case
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') &times;
+          .modal-body
+            .row.mt
+              .col-lg-12
+                // <h4><i class="fa fa-angle-right"></i> Form Validations</h4>
+                .form-panel
+                  .form
+                    form#commentForm.cmxform.form-horizontal.style-form(method='post', action='/case/post')
+                      input(type='hidden', name='_csrf', value=_csrf)
+                      input(type='hidden', name='rmaid', value=user.rmaId)
+                      input#choice(type='hidden', name='choice', value='')
+                      .form-group
+                        label.control-label.col-lg-2(for='cname') Name 
+                        .col-lg-10
+                          input#cname.form-control(name='name', minlength='2', type='text')
+                      .form-group
+                        label.control-label.col-lg-2(for='cname')  Filenumber
+                        .col-lg-10
+                          input#cname.form-control(name='filenumber', minlength='2', type='text', )
+                      .form-group#emailFormGroup
+                        label.control-label.col-lg-2(for='cemail') Opendate
+                        .col-lg-10
+                          input#cemail.form-control(type='date', name='opendate', )
+                          p.help-block#emailBlock 
+                      .form-group
+                        label.control-label.col-lg-2(for='curl') Listened with ?
+                        .col-lg-10
+                          .radio
+                            label
+                              input#optionsRadios1(type='radio',onChange='showJudge(this)', name='listen', value='judge')
+                              |  judge
+                            span 
+                            span
+                              label
+                                input#optionsRadios2(type='radio',onChange='showJudge(this)', name='listen', value='rm')
+                                |  resident migstry
+                      .form-group#judge
+                        label.control-label.col-lg-2(for='cemail') Judge
+                        .col-lg-10
+                          select#cemail.form-control(name='judgeid')
+                            if judges !== '' || judges !== undefined
+                              each n in judges
+                                option(value=n.id)=n.firstname+' '+n.lastname
+                      .form-group#rm
+                        label.control-label.col-lg-2(for='cemail') Resident migstrate
+                        .col-lg-10
+                          select#rm.form-control(name='rmid')
+                            each n in rm
+                              option(value=n.id)=n.firstname+' '+n.lastname
+                      .form-group
+                        .col-lg-offset-2.col-lg-10
+                          button.btn.btn-theme#submitRmaInfo(type='submit') Submit informations
+                          span.pull-right 
+                             button.btn.btn-outline-danger#resetJudgeInfo(type='reset') Clear informations                             
+                          
+                          
+                // /form-panel
+              // /col-lg-12
+
+    //model
+    script(src='/js/cases.js',type='text/javascript')
+         
+        

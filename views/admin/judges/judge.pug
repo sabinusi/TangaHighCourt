@@ -1,0 +1,135 @@
+//- extends admin/layout
+
+//- block content
+//-     section#main-content
+//-       section.wrapper.site-min-height
+extends ../layout
+
+block content
+    section#main-content
+      section.wrapper.site-min-height
+            include ../../partials/flash
+            .row.mt
+                .col-md-12
+                  .content-panel
+                    table.table.table-striped.table-advance.table-hover
+                      h4
+                        |  JUDGES
+                        button.btn.btn-success.btn-xs.pull-right.fa.fa-database(type='button', data-toggle='modal', data-target='#largeShoes')
+                          | ADD JUDGE
+                      span
+                      hr
+                      thead
+                        tr
+                          th
+                            i.fa.fa-user
+                            |  Firstname
+                          th.hidden-phone
+                            i.fa.fa-user-circle
+                            |  Lastname
+                          th
+                            i.fa.fa-envelope
+                            |  Email
+                          th
+                            i.fa.fa-user-circle-o
+                            |  Gender
+                          th
+                          
+                      tbody#myTable
+                      each n in judges
+                        tr
+                        
+                          td=n.firstname
+                            
+                          td=n.lastname
+                          td=n.email
+                          td
+                            span=n.gender
+                          td(style="display:flex")
+                           
+                            a.btn.btn-primary.btn-xs(href='judge/edit/'+n.id)
+                              i.fa.fa-pencil
+                            span    
+                                                      
+                            //- button.btn.btn-danger.btn-xs
+                            //-   i.fa.fa-trash-o
+                            form(method='post',action='judge/'+n.id)
+                              input(type='hidden', name='_csrf', value=_csrf)
+                              //- input(type='hidden', name='_method', value="DELETE")
+                              
+                              button.btn.btn-danger.btn-xs.ml-2(type="submit")
+                                i.fa.fa-trash-o
+                  // /content-panel
+                // /col-md-12
+    //model
+    #largeShoes.modal.fade(tabindex='-1', role='dialog', aria-labelledby='modalLabelLarge', aria-hidden='true')
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-header
+            h4#modalLabelLarge.modal-title Adding Judge
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') &times;
+          .modal-body
+            .row.mt
+              .col-lg-12
+                // <h4><i class="fa fa-angle-right"></i> Form Validations</h4>
+                .form-panel
+                  .form
+                    form#commentForm.cmxform.form-horizontal.style-form(method='post',enctype='multipart/form-data', action='/judge/upload')
+                      input(type='hidden', name='_csrf', value=_csrf)
+                      .form-group
+                        label.control-label.col-lg-2(for='cname') Firstname 
+                        .col-lg-10
+                          input#cname.form-control(name='firstname', minlength='2', type='text', required='')
+                      .form-group
+                        label.control-label.col-lg-2(for='cname') Lastname 
+                        .col-lg-10
+                          input#cname.form-control(name='lastname', minlength='2', type='text', required='')
+                      .form-group#emailFormGroup
+                        label.control-label.col-lg-2(for='cemail') Email
+                        .col-lg-10
+                          input#cemail.form-control(type='email',onChange='validateEmail()' name='email', required='')
+                          p.help-block#emailBlock 
+                      .form-group
+                        label.control-label.col-lg-2(for='curl') Gender
+                        .col-lg-10
+                          .radio
+                            label
+                              input#optionsRadios1(type='radio', name='gender', value='male', checked='')
+                              |  Male
+                            span 
+                            span
+                              label
+                                input#optionsRadios2(type='radio', name='gender', value='female')
+                                |  Female
+                      .form-group
+                        label.control-label.col-lg-2(for='ccomment') Profile picture
+                        .col-lg-10
+                          .fileupload.fileupload-new(data-provides='fileupload')
+                            .fileupload-new.thumbnail(style='width: 200px; height: 150px;')
+                              img(src='http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image', alt='')
+                            .fileupload-preview.fileupload-exists.thumbnail(style='max-width: 200px; max-height: 150px; line-height: 20px;')
+                            div
+                              span.btn.btn-theme02.btn-file
+                                span.fileupload-new
+                                  i.fa.fa-paperclip
+                                  |  Select image
+                                span.fileupload-exists
+                                  i.fa.fa-undo
+                                  |  Change
+                                input.default#fileUpload(type='file',name='profilepicture',accept="image/*")
+                              button.btn.btn-theme04.fileupload-exists.ml-2#removePicture( data-dismiss='fileupload')
+                                i.fa.fa-trash-o
+                                |  Remove
+                      .form-group
+                        .col-lg-offset-2.col-lg-10
+                          button.btn.btn-theme#submitJudgeInfo(type='submit') Submit informations
+                          span.pull-right 
+                             button.btn.btn-outline-danger#resetJudgeInfo(type='reset') Clear informations
+                                                    
+                          
+                          
+                // /form-panel
+              // /col-lg-12
+
+                //model

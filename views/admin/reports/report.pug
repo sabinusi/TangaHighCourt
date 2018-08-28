@@ -1,0 +1,12 @@
+extends ../layout
+
+block content
+    section#main-content
+      section.wrapper.site-min-height
+            include ../../partials/flash
+            .row.mt
+                .col-md-12
+                  .content-panel
+                     table#example.display(style='width:100%')
+
+    script(src='/js/reports/report.js',type='text/javascript')

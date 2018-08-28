@@ -1,0 +1,49 @@
+header.header.black-bg
+  .sidebar-toggle-box
+    .fa.fa-bars.tooltips(data-placement='right', data-original-title='Toggle Navigation')
+  // logo start
+  a.logo(href='index.html')
+    b
+      | SOFT
+      span NET
+  // logo end
+  #top_menu.nav.notify-row
+    // notification start
+    ul.nav.top-menu
+      // settings start
+      li.dropdown
+        a.dropdown-toggle(data-toggle='dropdown', href='index.html#')
+          i.fa.fa-lock
+          | rma
+          
+        ul.dropdown-menu.extended.tasks-bar
+          .notify-arrow.notify-arrow-green
+          li
+            p.green Change default login password for record management assistant (RMA)
+          li
+            a
+              form
+                  .form-group
+                    label(for='disabledTextInput') Password
+                    input.form-control(type='text', placeholder='')
+                  .form-group
+                    label(for='disabledSelect') Re-password
+                    input.form-control(type='text', placeholder='')
+                  button.btn.btn-primary(type='submit') Submit
+                  span
+                    button.btn.btn-clear-g.pull-right(type='submit') Clear
+                   
+
+              
+                      
+      // settings end
+      // inbox dropdown start
+      li#header_inbox_bar
+        a(href='/account')
+          i.fa.fa-user
+          | My acount
+   
+  .top-menu
+    ul.nav.pull-right.top-menu
+      li
+        a.logout(href='/logout') Logout

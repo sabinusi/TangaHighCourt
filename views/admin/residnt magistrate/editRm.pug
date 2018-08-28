@@ -1,0 +1,85 @@
+extends ../layout
+
+block content
+    section#main-content
+      section.wrapper.site-min-height
+            include ../../partials/flash
+            .row.mt
+              .col-lg-12
+                // <h4><i class="fa fa-angle-right"></i> Form Validations</h4>
+                 center
+               
+                .form-panel
+                  center
+                   h4
+                     i.fa.fa-pencil-square-o="Edit (RMA) "+rm.firstname +" "+rm.lastname+" Informations"
+                   hr
+                  .form
+                    form#commentForm.cmxform.form-horizontal.style-form(method='post',enctype='multipart/form-data', action='/residentMigstrate/put')
+                      input(type='hidden', name='id', value=rm.id)
+                      .form-group
+                        label.control-label.col-lg-2(for='cname') Firstname 
+                        .col-lg-10
+                          input#cname.form-control(name='firstname', minlength='2',value=rm.firstname type='text', required='')
+                      .form-group
+                        label.control-label.col-lg-2(for='cname') Lastname 
+                        .col-lg-10
+                          input#cname.form-control(name='lastname', value=rm.lastname,minlength='2', type='text', required='')
+                      .form-group
+                        label.control-label.col-lg-2(for='cemail') Email
+                        .col-lg-10
+                          input#cemail.form-control(type='email', value=rm.email, name='email', required='')
+                      .form-group
+                        label.control-label.col-lg-2(for='curl') Gender
+                                           
+                        .col-lg-10
+                         
+                          .radio
+                            label
+                              input#optionsRadios1(type='radio', name='gender', value='female',checked='')
+                              |  Male
+                            span 
+                            span
+                              label
+                                input#optionsRadios2(type='radio', name='gender', value='male')
+                                |  Female
+                      .form-group
+                        label.control-label.col-lg-2(for='cemail') Phone
+                        .col-lg-10
+                          input#cemail.form-control(type='text', value=rm.phone  name='phone', required='')
+                   
+                      .form-group
+                        label.control-label.col-lg-2(for='ccomment') Profile picture
+                        .col-lg-10
+                          .fileupload.fileupload-new(data-provides='fileupload')
+                            .fileupload-new.thumbnail(style='width: 200px; height: 150px;')
+                              img(src='http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image', alt=' ')
+                            span.ml-4
+                            if rm.profile_picture == ''
+                                img(src='http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image+uploaded', alt='uploded picture')
+                            else
+                                .fileupload-new.thumbnail(style='width: 200px; height: 150px;')
+                                  img(src='/uploads/resident migstrate/'+rm.profile_picture, alt='')
+                                
+                            .fileupload-preview.fileupload-exists.thumbnail(style='max-width: 200px; max-height: 150px; line-height: 20px;')
+                            div
+                              span.btn.btn-theme02.btn-file
+                                span.fileupload-new
+                                  i.fa.fa-paperclip
+                                  |  Select image
+                                span.fileupload-exists
+                                  i.fa.fa-undo
+                                  |  Change
+                                input.default(type='file',name='profilepicture')
+                                
+                              a.btn.btn-theme04.fileupload-exists.ml-2(href='', data-dismiss='fileupload')
+                                i.fa.fa-trash-o
+                                |  Remove
+                      .form-group
+                         .col-lg-2
+                          a.btn.btn-danger(href='/residentMigstrate')
+                            i.fa.fa-arrow-circle-o-left 
+                            | Back
+                         .col-lg-10
+                          button.btn.btn-theme(type='submit') Submit informations
+                          span         

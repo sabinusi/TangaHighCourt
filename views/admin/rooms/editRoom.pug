@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+    section#main-content
+      section.wrapper.site-min-height
+            include ../../partials/flash
+            .row.mt
+              .col-lg-12
+                // <h4><i class="fa fa-angle-right"></i> Form Validations</h4>
+                 center
+               
+                .form-panel
+                   center
+                    h4
+                      i.fa.fa-pencil-square-o="Edit rooms infomations"
+                   hr
+                   form#commentForm.cmxform.form-horizontal.style-form(method='post', action='/room/put/'+room.id)
+                      input(type='hidden', name='_csrf', value=_csrf)
+                      
+                      .form-group
+                        label.control-label.col-lg-2(for='cname') Roomname 
+                        .col-lg-10
+                          input#cname.form-control(name='roomname', minlength='2',value=room.roomname type='text', required='')
+                      .form-group
+                        label.control-label.col-lg-2(for='cname') Roomnumber 
+                        .col-lg-10
+                          input#cname.form-control(name='roomnumber', value=room.roomnumber,minlength='2', type='text', required='')
+                      .form-group
+                        label.control-label.col-lg-2(for='cemail') Roomdescription
+                        .col-lg-10
+                          textarea#cemail.form-control(name="roomdescription", cols="30", rows="3")=room.roomdescription
+                            
+                      .form-group
+                         .col-lg-2
+                          a.btn.btn-danger(href='/rooms')
+                            i.fa.fa-arrow-circle-o-left 
+                            | Back
+                         .col-lg-10
+                          button.btn.btn-theme(type='submit') Submit informations
+                          span         

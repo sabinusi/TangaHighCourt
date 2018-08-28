@@ -1,0 +1,104 @@
+//- extends ../layout
+//- block content
+//-     section#main-content
+//-       section.wrapper.site-min-height
+//-            include ../../partials/flash
+extends ../layout
+block content
+    section#main-content
+      section.wrapper.site-min-height
+           include ../../partials/flash
+           .row.mt
+                .col-md-12
+                  .content-panel
+                      table.table.table-striped.table-advance.table-hover#example.display.nowrap(width='100%')
+                        h4
+                         | RESIDENT MIGISTRATE (RM)
+                         button.btn.btn-success.btn-xs.pull-right.fa.fa-database(type='button', data-toggle='modal', data-target='#largeShoes')
+                           | ADD (RM)          
+                        span
+                        hr
+           
+           
+               
+    //model
+    #largeShoes.modal.fade(tabindex='-1', role='dialog', aria-labelledby='modalLabelLarge', aria-hidden='true')
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-header
+            h4#modalLabelLarge.modal-title Adding Judge
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') &times;
+          .modal-body
+            .row.mt
+              .col-lg-12
+                // <h4><i class="fa fa-angle-right"></i> Form Validations</h4>
+                .form-panel
+                  .form
+                    form#commentForm.cmxform.form-horizontal.style-form(method='post',enctype='multipart/form-data', action='/residentMigstrate/upload')
+                      input(type='hidden', name='_csrf', value=_csrf)
+                      .form-group
+                        label.control-label.col-lg-2(for='cname') Firstname 
+                        .col-lg-10
+                          input#cname.form-control(name='firstname', minlength='2', type='text', required='')
+                      .form-group
+                        label.control-label.col-lg-2(for='cname') Lastname 
+                        .col-lg-10
+                          input#cname.form-control(name='lastname', minlength='2', type='text', required='')
+                      .form-group#emailFormGroup
+                        label.control-label.col-lg-2(for='cemail') Email
+                        .col-lg-10
+                          input#cemail.form-control(type='email',onChange='validateEmail()' name='email', required='')
+                          p.help-block#emailBlock 
+                      .form-group#phoneFormGroup
+                        label.control-label.col-lg-2(for='cemail') Phone
+                        .col-lg-10
+                          input#cphone.form-control(type='text',onChange="validatePhoneNumber(this)" name='phone', required='')
+                          p.help-block#phoneBlock 
+                          
+                      
+                      .form-group
+                        label.control-label.col-lg-2(for='curl') Gender
+                        .col-lg-10
+                          .radio
+                            label
+                              input#optionsRadios1(type='radio', name='gender', value='male', checked='')
+                              |  Male
+                            span 
+                            span
+                              label
+                                input#optionsRadios2(type='radio', name='gender', value='female')
+                                |  Female
+                      .form-group
+                        label.control-label.col-lg-2(for='ccomment') Profile picture
+                        .col-lg-10
+                          .fileupload.fileupload-new(data-provides='fileupload')
+                            .fileupload-new.thumbnail(style='width: 200px; height: 150px;')
+                              img(src='http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image', alt='')
+                            .fileupload-preview.fileupload-exists.thumbnail(style='max-width: 200px; max-height: 150px; line-height: 20px;')
+                            div
+                              span.btn.btn-theme02.btn-file
+                                span.fileupload-new
+                                  i.fa.fa-paperclip
+                                  |  Select image
+                                span.fileupload-exists
+                                  i.fa.fa-undo
+                                  |  Change
+                                input.default(type='file',name='profilepicture',accept="image/*")
+                              a.btn.btn-theme04.fileupload-exists(href='advanced_form_components.html#', data-dismiss='fileupload')
+                                i.fa.fa-trash-o
+                                |  Remove
+                      .form-group
+                        .col-lg-offset-2.col-lg-10
+                          button.btn.btn-theme#submitRmaInfo(type='submit') Submit informations
+                          span.pull-right 
+                             button.btn.btn-outline-danger#resetJudgeInfo(type='reset') Clear informations                             
+                          
+                          
+                // /form-panel
+              // /col-lg-12
+
+    //model
+    script(src='/js/residentMigstrate.js',type='text/javascript')
+         
+        

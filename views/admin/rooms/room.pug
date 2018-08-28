@@ -1,0 +1,98 @@
+//- extends admin/layout
+
+//- block content
+//-     section#main-content
+//-       section.wrapper.site-min-height
+extends ../layout
+
+block content
+    section#main-content
+      section.wrapper.site-min-height
+            include ../../partials/flash
+            .row.mt
+                .col-md-12
+                  .content-panel
+                    table.table.table-striped.table-advance.table-hover
+                      h4
+                        |  ROOMS
+                        button.btn.btn-success.btn-xs.pull-right.fa.fa-database(type='button', data-toggle='modal', data-target='#largeShoes')
+                          | ADD ROOM
+                      span
+                      hr
+                      thead
+                        tr
+                          th
+                            i.fa.fa-home
+                            |  Roomname
+                          th.hidden-phone
+                            i.fa.fa-plus-circle
+                            |  Roomnumber
+                          th
+                            i.fa.fa-plus
+                            |  Roomdescription
+                          th
+                            |  edit/delete
+                          
+                      tbody#myTable
+                      each n in room
+                        tr
+                          td=n.roomname
+                          td=n.roomnumber
+                          td=n.roomdescription
+                          td(style="display:flex")
+                           
+                            a.btn.btn-primary.btn-xs(href='room/edit/'+n.id)
+                              i.fa.fa-pencil
+                            span    
+                                                      
+                            //- button.btn.btn-danger.btn-xs
+                            //-   i.fa.fa-trash-o
+                            form(method='post',action='room/delete/'+n.id)
+                              input(type='hidden', name='_csrf', value=_csrf)
+                              //- input(type='hidden', name='_method', value="DELETE")
+                              
+                              button.btn.btn-danger.btn-xs.ml-2(type="submit")
+                                i.fa.fa-trash-o
+                  // /content-panel
+                // /col-md-12
+    //model
+    #largeShoes.modal.fade(tabindex='-1', role='dialog', aria-labelledby='modalLabelLarge', aria-hidden='true')
+      .modal-dialog.modal-lg
+        .modal-content
+          .modal-header
+            h4#modalLabelLarge.modal-title Adding Rooms
+            button.close(type='button', data-dismiss='modal', aria-label='Close')
+              span(aria-hidden='true') &times;
+          .modal-body
+            .row.mt
+              .col-lg-12
+                // <h4><i class="fa fa-angle-right"></i> Form Validations</h4>
+                .form-panel
+                  .form
+                    form#commentForm.cmxform.form-horizontal.style-form(method='post', action='/rooms/post')
+                      input(type='hidden', name='_csrf', value=_csrf)
+                      .form-group
+                        label.control-label.col-lg-2(for='cname') Roomname 
+                        .col-lg-10
+                          input#cname.form-control(name='roomname', minlength='2', type='text', required='')
+                      .form-group
+                        label.control-label.col-lg-2(for='cname') Roomnumber 
+                        .col-lg-10
+                          input#cname.form-control(name='roomnumber', minlength='2', type='text', required='')
+                      .form-group#emailFormGroup
+                        label.control-label.col-lg-2(for='cemail') Roomdescription
+                        .col-lg-10
+                          input#cemail.form-control(type='text', name='roomdescription')
+                          p.help-block#emailBlock 
+                      .form-group
+                        .col-lg-offset-2.col-lg-10
+                          button.btn.btn-theme#submitJudgeInfo(type='submit') Submit informations
+                          span.pull-right 
+                             button.btn.btn-outline-danger#resetJudgeInfo(type='reset') Clear informations
+                                                    
+                          
+                          
+                // /form-panel
+              // /col-lg-12
+
+                //model

@@ -1,0 +1,67 @@
+aside
+  #sidebar.nav-collapse
+    // sidebar menu start
+    ul#nav-accordion.sidebar-menu
+      p.centered
+        a(href='profile.html')
+          img.img-circle(src='/admin/img/ui-sam.jpg', width='80')
+      h5.centered=user.profile.name
+      
+      //- li.mt
+      //-   a(href='/dashbaord')
+      //-     i.fa.fa-dashboard
+      //-     span Dashboard
+
+      li.sub-menu
+        a(href='javascript:;',class=(mainActive=='dash')? 'active' : undefined)
+          i.fa.fa-dashboard
+          span Dashboard
+        ul.sub
+          li(class=(subActive === 'dash')? 'active': undefined)
+            a(href='/dashbaord') dashboard
+      li.sub-menu
+        a(href='javascript:;',class=(mainActive=='rma')? 'active' : undefined)
+          i.fa.fa-user
+          span Users Management
+        ul.sub
+          li(class=(subActive === 'judge')? 'active': undefined)
+            a(href='/judge') Judges
+          li(class=(subActive === 'rma')? 'active': undefined)
+            a(href='/recordManagementAssistant') Record Management
+            | assistance
+          li(class=(subActive === 'rm')? 'active': undefined)
+            a(href='/residentMigstrate') Resident Migstrate
+          li
+   
+      li.sub-menu
+        a(href='javascript:;',class=(mainActive=='report')? 'active' : undefined)
+          i.fa.fa-book
+          span Reports
+        ul.sub
+          li(class=(subActive === 'closed')? 'active': undefined)
+            a(href='/reports') Closed cases
+        ul.sub
+            li(class=(subActive === 'post')? 'active': undefined)
+              a(href='/postpondedCases') Postponded
+      li.sub-menu
+        a(href='javascript:;',class=(mainActive=='cases')? 'active' : undefined)
+          i.fa.fa-desktop
+          span Cases management
+        ul.sub
+          li(class=(subActive=='cas')? 'active' : undefined)
+            a(href='/case/cases') cases 
+        ul.sub
+          li(class=(subActive=='hearing')? 'active' : undefined)
+            a(href='/case/hearing') hearing 
+      li.sub-menu
+        a(href='javascript:;',class=(mainActive=='rooms')? 'active' : undefined)
+          i.fa.fa-home
+          span Rooms management
+        ul.sub
+          li.active
+            a(href='/rooms') rooms 
+                        
+            
+         
+     
+    // sidebar menu end
